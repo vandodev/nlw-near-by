@@ -1,0 +1,49 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id String  @id @default(uuid())
+  name String
+  markets Market[]
+
+  @@map("categories")
+}
+
+
+model Rules {
+  id String  @id @default(uuid())
+  description String
+
+  marketId String @map("market_id")
+  market Market @relation(fields: [marketId], references: [id])
+
+  @@map("rules")
+}
+
+model Market {
+  id String  @id @default(uuid())
+  name String
+  description  String
+  coupons Int
+  
+  latitude  Float
+  longitude Float
+
+  address String
+  phone String
+  cover String
+  
+  categoryId String @map("category_id")
+  category Category @relation(fields: [categoryId], references: [id])
+  
+  rules Rules[]
+
+  @@map("markets")
+}
