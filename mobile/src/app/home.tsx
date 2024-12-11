@@ -3,7 +3,8 @@ import { useEffect, useState } from "react"
 import { Categories, CategoriesProps } from "@/components/categories"
 import { Places } from "@/components/places"
 import { PlaceProps } from "@/components/place"
-import MapView from "react-native-maps"
+import MapView, { Callout, Marker } from "react-native-maps"
+import * as Location from "expo-location"
 import { api } from "@/services/api"
 
 type MarketsProps = PlaceProps
@@ -43,8 +44,22 @@ export default function Home() {
       }
     }
 
+    async function getCurrentLocation() {
+      try {
+        const { granted } = await Location.requestForegroundPermissionsAsync()
+        if (granted) {
+          const location = await Location.getCurrentPositionAsync()
+          console.log(location)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  
+
     useEffect(() => {
         fetchCategories()
+        getCurrentLocation()
     }, [])
 
     useEffect(() => {
