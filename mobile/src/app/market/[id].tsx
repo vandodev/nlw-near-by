@@ -1,8 +1,9 @@
 import { useEffect, useState, useRef } from "react"
 import { View, StatusBar, Text, Alert } from "react-native"
 import { api } from "@/services/api"
-import { router, useLocalSearchParams } from "expo-router"
+import { router, useLocalSearchParams, Redirect } from "expo-router"
 import { Loading } from "@/components/loading"
+import { Cover } from "@/components/market/cover"
 
 export default function Market() {
   const [data, setData] = useState()
@@ -33,10 +34,14 @@ export default function Market() {
     return <Loading />
   }
 
+  if (!data) {
+    return <Redirect href="/home" />
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" />
-      <Text>{params.id}</Text>     
+      <Cover uri={data.cover} />    
     </View>
   )
 }
