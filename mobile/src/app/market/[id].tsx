@@ -4,9 +4,14 @@ import { api } from "@/services/api"
 import { router, useLocalSearchParams, Redirect } from "expo-router"
 import { Loading } from "@/components/loading"
 import { Cover } from "@/components/market/cover"
+import { Details, PropsDetails } from "@/components/market/details"
+
+type DataProps = PropsDetails & {
+  cover: string
+}
 
 export default function Market() {
-  const [data, setData] = useState()
+  const [data, setData] = useState<DataProps>()
   const [isLoading, setIsLoading] = useState(true)
   const params = useLocalSearchParams<{ id: string }>()
 
@@ -41,7 +46,8 @@ export default function Market() {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" />
-      <Cover uri={data.cover} />    
+      <Cover uri={data.cover} />  
+      <Details data={data} />  
     </View>
   )
 }
