@@ -5,6 +5,7 @@ import { router, useLocalSearchParams, Redirect } from "expo-router"
 import { Loading } from "@/components/loading"
 import { Cover } from "@/components/market/cover"
 import { Details, PropsDetails } from "@/components/market/details"
+import { Coupon } from "@/components/market/coupon"
 
 type DataProps = PropsDetails & {
   cover: string
@@ -48,6 +49,7 @@ export default function Market() {
       <StatusBar barStyle="light-content" />
       <Cover uri={data.cover} />  
       <Details data={data} />  
+      <Coupon code="FMXD20H4" />
     </View>
   )
 }
