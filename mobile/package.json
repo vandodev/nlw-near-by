@@ -37,7 +37,8 @@
     "react-native-web": "~0.19.13",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-maps": "1.18.0",
-    "expo-location": "~18.0.4"
+    "expo-location": "~18.0.4",
+    "expo-camera": "~16.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
