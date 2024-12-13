@@ -15,6 +15,7 @@ export default function Market() {
   const [data, setData] = useState<DataProps>()
   const [isLoading, setIsLoading] = useState(true)
   const params = useLocalSearchParams<{ id: string }>()
+  const [coupon, setCoupon] = useState<string | null>(null)
 
   async function fetchMarket() {
     try {
@@ -34,7 +35,7 @@ export default function Market() {
 
   useEffect(() => {
     fetchMarket()
-  }, [params.id])
+  }, [params.id, coupon])
 
   if (isLoading) {
     return <Loading />
@@ -49,7 +50,7 @@ export default function Market() {
       <StatusBar barStyle="light-content" />
       <Cover uri={data.cover} />  
       <Details data={data} />  
-      <Coupon code="FMXD20H4" />
+      {coupon && <Coupon code={coupon} />}
     </View>
   )
 }
